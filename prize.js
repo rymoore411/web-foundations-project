@@ -29,12 +29,13 @@ const customer = document.querySelector('#customers');
 
 const handler = (ev) => {
   const action = ev.target.getAttribute('data-action');
-  const parent = ev.target.parentElement;
+  let prizeCountInc = ev.target.previousElementSibling;
+  // let prizeCountDec = ev.target.nextElementSibling;
   if(action === 'inc'){
 
   }
 
-  console.log(parent.textContent);
+  console.log(prizeCountInc.innerHTML);
 
   render();
 
@@ -113,7 +114,8 @@ div.innerHTML = html;
         Object.keys(itemNames).map(key => `
         <div id = 'stooge'>
         <button data-action='dec'>-</button>
-        ${[key]} ${[itemNames[key]]}
+        <span id = 'prize'> ${[key]}</span>
+        <span id = 'item-count'>${[itemNames[key]]}</span>
         <button data-action='inc'>+</button>
         </div>`).join('')
       }
