@@ -24,23 +24,7 @@ const data = {
 };
 //Add event listeners
 
-// const moe = document.querySelector('#moe');
-// const larry = document.querySelector('#larry');
-// const curly = document.querySelector('#curly');
-
-// console.log(moe);
-
-// const handler = (ev) => {
-//   console.log(ev);
-
-//   //render();
-// }
-
-// console.log('test');
-
-// moe.addEventListener('click', handler);
-// larry.addEventListener('click', handler);
-// curly.addEventListener('click', handler);
+const prizeInventory = document.querySelector('#prizes');
 
 const customer = document.querySelector('#customers');
 
@@ -74,7 +58,38 @@ const totalPrizes = Object.keys(data.prizes).map(key => data.prizes[key]);
 
 //Use renderSection to make sections for our template
 
-const renderSection = (stooge, div)=>{
+
+
+const renderSection = (div)=>{
+  if(div === prizeInventory){
+
+  const html = `
+  <div>
+  <div style = 'display:flex'>
+    ${
+    Object.keys(data.prizes).map(key => `
+    <div style = 'flex:1'>
+    ${[key]}
+    <div><br></div>
+    <div>
+      ${
+        Object.keys(data.prizes).map(key => `
+        <div>
+        ${data.prizes[key]}
+        </div>`).join('')
+      }
+      </div>
+      </div>
+    `).join('')
+    }
+</div>
+`;
+
+div.innerHTML = html;
+
+}
+
+  if(div === customer){
   const html = `
   <div>
   <div style = 'display:flex'>
@@ -85,9 +100,12 @@ const renderSection = (stooge, div)=>{
     <div><br></div>
     <div>
       ${
-        items.map(el => `
-        <div>${el}</div>
-        `).join('')
+        Object.keys(itemNames).map(key => `
+        <div>
+        <button data-action='dec'>-</button>
+        ${[key]} ${[itemNames[key]]}
+        <button data-action='inc'>+</button>
+        </div>`).join('')
       }
       </div>
       </div>
@@ -97,6 +115,7 @@ const renderSection = (stooge, div)=>{
 `;
 
     div.innerHTML = html;
+  }
 
 }
 
@@ -110,7 +129,8 @@ const renderSection = (stooge, div)=>{
 
 const render = ()=> {
 
-  renderSection('Customers', customer);
+  renderSection(prizeInventory);
+  renderSection(customer);
 
 
 };
