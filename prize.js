@@ -25,8 +25,23 @@ const data = {
 //Add event listeners
 
 const prizeInventory = document.querySelector('#prizes');
-
 const customer = document.querySelector('#customers');
+
+const handler = (ev) => {
+  const action = ev.target.getAttribute('data-action');
+  const parent = ev.target.parentElement;
+  if(action === 'inc'){
+
+  }
+
+  console.log(parent.textContent);
+
+  render();
+
+}
+
+customer.addEventListener('click', handler);
+
 
 //Loop through object to get our values for our template
 let stooge = [];
@@ -71,13 +86,8 @@ const renderSection = (div)=>{
     <div style = 'flex:1'>
     ${[key]}
     <div><br></div>
+    ${data.prizes[key]}
     <div>
-      ${
-        Object.keys(data.prizes).map(key => `
-        <div>
-        ${data.prizes[key]}
-        </div>`).join('')
-      }
       </div>
       </div>
     `).join('')
@@ -101,7 +111,7 @@ div.innerHTML = html;
     <div>
       ${
         Object.keys(itemNames).map(key => `
-        <div>
+        <div id = 'stooge'>
         <button data-action='dec'>-</button>
         ${[key]} ${[itemNames[key]]}
         <button data-action='inc'>+</button>
@@ -119,13 +129,6 @@ div.innerHTML = html;
 
 }
 
-
-//       `<li> ${[key]} </li>`).join('')
-//   }
-//   </ul>
-//   `;
-//   div.innerHTML = html;
-// };
 
 const render = ()=> {
 
