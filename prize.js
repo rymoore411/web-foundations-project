@@ -27,21 +27,6 @@ const data = {
 const prizeInventory = document.querySelector('#prizes');
 const customer = document.querySelector('#customers');
 
-const handler = (ev) => {
-  const action = ev.target.getAttribute('data-action');
-  let prizeCountInc = ev.target.previousElementSibling;
-  // let prizeCountDec = ev.target.nextElementSibling;
-  if(action === 'inc'){
-
-  }
-
-  console.log(prizeCountInc.innerHTML);
-
-  render();
-
-}
-
-customer.addEventListener('click', handler);
 
 
 //Loop through object to get our values for our template
@@ -102,7 +87,7 @@ div.innerHTML = html;
 
   if(div === customer){
   const html = `
-  <div>
+  <div id = 'customer'>
   <div style = 'display:flex'>
     ${
     Object.keys(data.customers).map(key => `
@@ -141,6 +126,26 @@ const render = ()=> {
 };
 
 render();
+
+const handler = (ev) => {
+  const prize = document.querySelector("#prize");
+  let itemCount = document.querySelector("#item-count");
+  const action = ev.target.getAttribute('data-action');
+  let count = 0;
+
+  if(action === 'inc'){
+
+      itemCount.innerHTML = count + 1;
+
+  }
+
+  console.log(itemCount);
+
+  render();
+
+}
+
+customer.addEventListener('click', handler);
 
 
 
